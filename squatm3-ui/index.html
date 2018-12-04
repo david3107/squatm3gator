@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Squatm3gator</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <!-- Material Design Bootstrap -->
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/mdb.min.css') }}">
+  <!-- Your custom styles (optional) -->
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/compiled.css') }}">
+
+
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/datables.material.min.css') }}">
+
+
+
+</head>
+
+<body>
+
+<!--Main Navigation-->
+<header>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark special-color scrolling-navbar">
+    <a class="navbar-brand" href="#"><strong>Squatm3gator</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" target="_blank" href="https://github.com/david3107/squatm3gator">Features</a>
+        </li>
+      
+      </ul>
+      <ul class="navbar-nav nav-flex-icons">
+
+     
+         <li class="nav-item">
+          <a class="nav-link"><i class="fa fa-github"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</header>
+<!--Main Navigation-->
+
+  <!-- Start your project here-->
+
+<br><br><br>
+  <div style="height: 100vh">
+
+    <div class="container container-fluid">
+
+ <div class="md-form mt-0 form-inline">
+   
+      <img src="https://camo.githubusercontent.com/b1c7a83bfaa295020263f3bb04f38f33d1c526e9/687474703a2f2f706978656c6172746d616b65722e636f6d2f6172742f3764383930373862313662623764372e706e67" class="rounded" alt="Squaaaaaaat" style="max-width:400px;float:left;margin:20px">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" class="rounded" alt="" style="max-width:400px;">
+   </div>
+
+<!-- Domain input  -->
+  <div class="md-form mt-0 form-inline">
+  <input class="form-control form-inline" style="width: 88%;float:left;margin: 5px; font-size:30px" type="text" placeholder="domain.com" aria-label="Search" id="domain_to_squat" onkeyup="domainValidate()"> 
+
+
+
+  <!-- Start button to search  -->
+
+
+
+<span class="form-group bmd-form-group" style="text-align: right;float:right;"> <!-- needed to match padding for floating labels -->
+          <button type="button" class="btn pink" id="squat" >Squat</button>
+  </span>
+
+<!-- End button to search  -->
+
+
+</div>
+  <!-- /Domain input -->
+
+
+<!-- Checkboxes  -->
+
+<div class="card" id="filters">
+    
+
+   <h3 class="card-header special-color lighten-1 white-text text-uppercase font-weight-bold text-center py-3">Attack options</h3>
+  
+ 
+
+   <div class="card-body"> 
+
+       
+
+    <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="attack_all" onchange='checkAll(this);'>
+    <label class="form-check-label" for="attack_all" >All</label>
+    </div>
+
+       
+
+         <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="attack_hg">
+    <label class="form-check-label" for="attack_hg">Homoglyphs (fast)</label>
+    </div>
+
+       
+
+
+         <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="attack_hg_full">
+    <label class="form-check-label" for="attack_hg_full">Homoglyphs full (slow)</label>
+    </div>
+
+
+
+
+    <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="attack_substitution">
+    <label class="form-check-label" for="attack_substitution">Substitution</label>
+    </div>
+
+        
+
+
+    <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="attack_flipping">
+    <label class="form-check-label" for="attack_flipping">Flipping</label>
+    </div>
+      
+
+    <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="attack_duplicate">
+    <label class="form-check-label" for="attack_duplicate">Duplicate characters</label>
+    </div>
+
+
+
+    <div class="form-check form-check-inline">
+    <input type="checkbox" class="form-check-input" id="attack_check_domains">
+    <label class="form-check-label" for="attack_check_domains">Check if available (1 check/s)</label>
+    </div>
+
+    </div>
+
+</div>
+
+<!--  /Checkboxes  -->
+<br>
+
+<!-- Start Output and Results selection  -->
+
+<div class="card" id="" >
+    
+
+   <h3 class="card-header special-color lighten-1 white-text text-uppercase font-weight-bold text-center py-3">Select output </h3>
+  
+ 
+
+   <div class="card-body"> 
+
+       
+
+ <select class="browser-default custom-select" id="attack_output">
+  <option  value="0">Real time</option>
+  <option selected value="1">All-in-one (Slow)</option>
+</select>
+
+    </div>
+
+</div>
+
+
+<!-- End Output and Results selection  -->
+<br>
+
+<!-- Start Results in a table  -->
+<br>
+<br>
+<br>
+<h3 class="card-header special-color lighten-1 white-text text-uppercase font-weight-bold text-center py-3">Results</h3>
+
+   <div class="card"  id="squat_results">
+              
+              <div class="card-body">  
+      
+  <table id="dtBasicExample" class="table table-xm" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Domain
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm">Available
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm">Price
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+       <th class="th-sm">Buy domain
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody id="table_body">
+    
+
+   
+  </tbody>
+  <tfoot>
+   
+  </tfoot>
+</table>
+
+  </div> <!--<div class="card">-->
+</div><!--<div class="card-body"> -->
+ 
+<br>
+
+ <footer align="center">
+  
+ <p class="animated fadeIn text-muted">
+
+       @davide107 <a class="btn-floating btn-sm btn-tw" type="button" role="button"><i class="fa fa-twitter"></i></a> 
+           <a class="btn-floating btn-sm btn-git" type="button" role="button"><i class="fa fa-github"></i></a> 
+        <a class="btn-floating btn-sm btn-tw" type="button" role="button"><i class="fa fa-twitter"></i>
+        </a>@ztefan 
+     
+
+     </p>
+
+</footer>
+
+    </div>
+
+
+  </div>
+  <!-- /Start your project here-->
+
+  <!-- SCRIPTS -->
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+
+  <!-- JQuery -->
+  
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+
+
+    <!-- Datatables -->
+  
+  <script type="text/javascript" src="{{ url_for('static', filename='js/datatables.js') }}"></script>
+
+  <!-- Bootstrap tooltips -->
+  
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
+  <!-- Bootstrap core JavaScript -->
+  
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+  <!-- MDB core JavaScript -->
+ 
+    <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+
+
+
+
+
+
+  <script>
+
+  valid_domain = false;
+  
+  
+  var socket = io('http://' + document.domain + ':' + location.port);
+
+
+  socket.on('connect', function() {
+    console.log("Connected to websockets")
+    socket.emit('client_connected');
+  });
+  
+
+  socket.on('results', function(data) {
+    console.log("Receiving from websockets");
+     $("#squat").prop("disabled", false);
+
+   
+
+
+    try{
+      
+     
+      var attack = JSON.parse(data).messages[0];
+      
+      //Clear the table only if it's avalid JSON
+      table.clear();
+
+      $.each(JSON.parse(data).domains, function(i, item) {
+        
+
+        if(item.purchasable  == "True")
+          button = "<a type=\"button\" class=\"btn btn-sm pink\" style=\"color:white;\"  target=\"_blank\" href=\"https://uk.godaddy.com/domainsearch/find?checkAvail=1&tmskey=&domainToCheck="+item.fqdn+"\">Buy</a>"
+        else
+          button = "<a type=\"button\" class=\"btn btn-sm grey\" style=\"color:white;\">Not Available</a>"
+
+       
+
+        table.row.add( [
+        item.fqdn,
+        item.purchasable,
+        item.price,
+        button
+       
+    ] ).draw();
+
+
+      });
+
+
+       
+
+
+    }
+    catch(e){
+
+
+      var res = data.match(/6;30;42/g);
+
+      if(!res){
+        var parts = data.split('-')
+        
+        var price = "";
+        var info = parts[1];
+        var squatted_domain = parts[0];
+        
+        if (parts.length == 2){
+
+          price = "Check manually"
+
+        }
+        
+        else{
+
+          price = parts[2]
+
+        }
+        
+      
+        button = "<a type=\"button\" class=\"btn btn-sm grey\" style=\"color:white;\">Not Available</a>"
+        
+        table.row.add( [
+        squatted_domain,
+        info,
+        price,
+        button
+        ] ).draw();
+      }
+
+    }
+   
+    
+
+  });
+
+
+
+    //onclick on stop button 
+    function showSquatButton(){
+
+
+      
+      $("#squat").prop("disabled", false);
+
+
+
+
+    }
+
+    // Validate domain
+  function domainValidate() {
+    var val = $("#domain_to_squat")[0].value;
+    if (/^[a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(val)) {
+        valid_domain = true;
+    }
+    else {
+         valid_domain = false;
+    }
+  }
+
+    /*Call API*/
+    function callApi(){
+      
+      if(!valid_domain){
+        alert("ERROR: Insert a valid domain");
+        return;
+      }
+      var domain = $("#domain_to_squat")[0].value;
+      var attack_all = $('#attack_all')[0].checked;
+      var attack_hg = $('#attack_hg')[0].checked;
+      var attack_hg_full = $('#attack_hg_full')[0].checked;
+      var attack_substitution = $('#attack_substitution')[0].checked;
+      var attack_flipping = $('#attack_flipping')[0].checked;
+      var attack_duplicate = $('#attack_duplicate')[0].checked;
+      var attack_check_domains = $('#attack_check_domains')[0].checked;
+      var attack_output = $('#attack_output')[0].value;
+      
+      $("#squat").prop("disabled", true);
+      
+
+      
+      attack_query_string = ""
+
+      if(attack_hg)
+        attack_query_string = attack_query_string + "Hf,";
+      if(attack_hg_full)
+        attack_query_string = attack_query_string + "Hc,";
+      if(attack_substitution)
+        attack_query_string = attack_query_string + "R,";
+      if(attack_flipping)
+        attack_query_string = attack_query_string + "F,";
+      if(attack_duplicate)
+        attack_query_string = attack_query_string + "-add,";
+
+      var godaddy_enabled = 0;
+      if(attack_check_domains == true)
+        godaddy_enabled = 1;
+
+
+
+
+      if(attack_output == 0){
+
+
+        //make this async
+        $.get( "/api/"+domain, { attacks: attack_query_string, godaddy: godaddy_enabled ,output: "0" } );
+
+
+        
+
+        
+
+      }
+      
+      else{
+
+
+
+        //make this async
+        $.get( "/api/"+domain, { attacks: attack_query_string, godaddy: godaddy_enabled,output: "1" } );
+
+
+
+      }
+    
+    }
+
+    /**/
+    function checkAll(checkbox) {
+
+      if(checkbox.checked == true){
+        $('#attack_duplicate')[0].checked = true;
+        $('#attack_hg')[0].checked = true;
+        $('#attack_hg_full')[0].checked = true;
+        $('#attack_substitution')[0].checked = true;
+        $('#attack_flipping')[0].checked = true;
+      }
+
+    
+}
+
+ $(document).ready(function () {
+
+    /*
+    * Table initialization 
+    */ 
+
+    table = $('#dtBasicExample').DataTable({
+                
+    });
+ 
+    $('.dataTables_length').addClass('bs-select');
+
+    });
+    
+    /*
+    * Squat button clicked
+    */ 
+
+    $('#squat').click(function(){
+
+     
+
+      var searchField = $('txt-search').val();
+      if(searchField == "")  {
+          
+          $('#table_body').html('');
+          return;
+      }
+
+      callApi();
+              
+});
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>
