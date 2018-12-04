@@ -1,7 +1,7 @@
 tld==0.9.1
 attrs==18.2.0
 redis==2.10.6
-requests==2.19.1
+requests>=2.20.0
 simplejson==3.16.0
 Flask_RESTful==0.3.6
 Flask==1.0.2
