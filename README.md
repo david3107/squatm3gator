@@ -6,11 +6,11 @@ Squatm3gator is a complete web solution based on the python tool squatm3, design
 
 -	Substitution attacks
 -	Flipping attack
-- 	Homoglyph attack fast (execute a fast homoglyph attack, mutating only one letter at the time )
+- 	Homoglyph attack fast (execute a fast homoglyph attack, mutating only one letter at the time)
 -   Homoglyph attack complete (generates all the possible combinations)
 
 
-The tool is ment to help penetration testers to identify domains to be used in phishing attack simulations and security analysts to detect and prevent cybersquatting attacks.
+The tool is meant to help penetration testers to identify domains to be used in phishing attack simulations and security analysts to detect and prevent cybersquatting attacks.
 
 
 ## Architecture
@@ -36,6 +36,7 @@ pip3 install -r requirements.txt
 
 ### Spin up a Redis container
 
+One way to get it quickly done is to use the bitnami/redis docker:
 ```
 docker run -e REDIS_PASSWORD=waddup --name squatme-redis -p 6379:6379 bitnami/redis
 

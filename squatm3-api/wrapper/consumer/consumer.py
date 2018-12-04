@@ -6,7 +6,6 @@ c_jobs = comm.Communication()
 job_process = None
 
 def report(connection, channel, message):
-	print("CH:   "+channel)
 	#connection.redis.lpush(connection.channel_reporting, message)
 	if channel == connection.channel_reporting:
 		connection.redis.lpush(connection.channel_reporting, message)
