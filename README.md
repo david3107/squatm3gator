@@ -95,15 +95,6 @@ pip3 install -r requirements.txt --user
 
 Run the app on browsing on: 
 
-## Presented at
-
-[Black Hat Arsenal Europe 2018](https://www.blackhat.com/eu-18/arsenal/schedule/index.html#squatm-cybersquatting-made-easy-13319)
-       
-        
-        
-      
-
-
 ```
 http://localhost:5000
 ```
@@ -114,4 +105,9 @@ Squatm3gator is licensed under the GNU GPL license.
 
 
 ## Version
-Current version is 1.0 
+Current version is 1.1
+
+## Presented at
+
+[Black Hat Arsenal Europe 2018](https://www.blackhat.com/eu-18/arsenal/schedule/index.html#squatm-cybersquatting-made-easy-13319)
+       
