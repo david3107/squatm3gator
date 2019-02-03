@@ -9,18 +9,13 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Bootstrap core CSS -->
-  
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <!-- Material Design Bootstrap -->
-      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/mdb.min.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/mdb.min.css') }}">
   <!-- Your custom styles (optional) -->
-      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/compiled.css') }}">
-
-
-      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/datables.material.min.css') }}">
-
-
-
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/compiled.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/datables.material.min.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/custom.css') }}">
 </head>
 
 <body>
@@ -56,6 +51,8 @@
 
 </header>
 <!--Main Navigation-->
+
+
 
   <!-- Start your project here-->
 
@@ -159,6 +156,13 @@
 
 <!--  /Checkboxes  -->
 <br>
+
+
+<!--Start Spinner-->
+
+<div id="cover-spin"></div>
+
+<!--End Spinner-->
 
 <!-- Start Output and Results selection  -->
 
@@ -295,16 +299,23 @@
   socket.on('results', function(data) {
     console.log("Receiving from websockets");
      $("#squat").prop("disabled", false);
+     
+
+     // disable the spinner (loading)
+     $('#cover-spin').hide(0)
+
+
+    
 
    
 
 
     try{
       
-     
+      
       var attack = JSON.parse(data).messages[0];
       
-      //Clear the table only if it's avalid JSON
+      //Clear the table only if it's a valid JSON
       table.clear();
 
       $.each(JSON.parse(data).domains, function(i, item) {
@@ -323,17 +334,21 @@
         item.price,
         button
        
-    ] ).draw();
+    ]);
 
 
       });
 
 
-       
+       table.draw();
 
 
     }
+
     catch(e){
+
+
+
 
 
       var res = data.match(/6;30;42/g);
@@ -382,6 +397,8 @@
 
       
       $("#squat").prop("disabled", false);
+      // Show the spinner
+      $('#cover-spin').show(0)
 
 
 
@@ -415,9 +432,19 @@
       var attack_duplicate = $('#attack_duplicate')[0].checked;
       var attack_check_domains = $('#attack_check_domains')[0].checked;
       var attack_output = $('#attack_output')[0].value;
+
+
+      if(!attack_all && !attack_hg && !attack_hg_full && !attack_substitution && !attack_flipping && !attack_duplicate){
+
+        alert("Please select at least one attack")
+        return;
+
+      }
+
+
       
       $("#squat").prop("disabled", true);
-      
+      $('#cover-spin').show(0)
 
       
       attack_query_string = ""
@@ -442,8 +469,9 @@
 
       if(attack_output == 0){
 
+        
 
-        //make this async
+
         $.get( "/api/"+domain, { attacks: attack_query_string, godaddy: godaddy_enabled ,output: "0" } );
 
 
@@ -457,7 +485,7 @@
 
 
 
-        //make this async
+        
         $.get( "/api/"+domain, { attacks: attack_query_string, godaddy: godaddy_enabled,output: "1" } );
 
 
@@ -504,7 +532,7 @@
 
       var searchField = $('txt-search').val();
       if(searchField == "")  {
-          
+          alert("No domain no party :) !!");
           $('#table_body').html('');
           return;
       }
