@@ -29,11 +29,10 @@ git clone https://github.com/david3107/squatm3gator.git
 
 ## Run the docker container
 
-
+Use the docker-compose command to build and run the flask application
 
 ```
-docker-compose build
-docker-compose up
+docker-compose up --build
 
 ```
 
