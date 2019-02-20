@@ -36,6 +36,11 @@ docker-compose up --build
 
 ```
 
+## Run the application 
+
+
+The application is available on `http://localhost:5000/`
+
 ## License
 
 Squatm3gator is licensed under the GNU GPL license.
