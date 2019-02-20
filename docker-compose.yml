@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "5000:5000"
+    depends_on:
+     - redis
+    links:
+     - redis
+  redis:
+    image: "redis"
+    container_name: squatme-redis
+    command: redis-server --requirepass waddup
