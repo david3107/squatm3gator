@@ -6,6 +6,8 @@ class Domain:
 		self.purchasable = ""
 		self.price = ""
 		self.no_info = False
+		self.creation_date = ""
+		self.expiry_date = ""
 
 	def _asdict(self):
 		return self.__dict__

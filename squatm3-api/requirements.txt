@@ -13,3 +13,4 @@ requests>=2.20.1
 simplejson==3.16.0
 tld==0.9.1
 validators==0.12.2
+whois
