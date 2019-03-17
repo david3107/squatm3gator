@@ -417,7 +417,7 @@
   }
 
     /*Call API*/
-    function callApi(){
+    function callApi(table){
       
       if(!valid_domain){
         alert("ERROR: Insert a valid domain");
@@ -442,7 +442,7 @@
       }
 
 
-      
+      table.clear();
       $("#squat").prop("disabled", true);
       $('#cover-spin').show(0)
 
@@ -537,7 +537,7 @@
           return;
       }
 
-      callApi();
+      callApi(table);
               
 });
 
