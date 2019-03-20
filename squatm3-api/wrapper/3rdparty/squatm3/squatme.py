@@ -11,6 +11,7 @@ from modules.Tldmodule.TldSelector import TldSelector
 from modules.Urlchecker import checkvalidity
 from modules.Output import outputer
 from modules.Classes import Domain
+from modules.Whoiser import Whoiser
 import os
 
 
@@ -171,6 +172,7 @@ def check_domain_availability(domains):
         tlds = tld_list.generate_domains_from_top_tld
 
     godaddy = GoDaddy.GoDaddy()
+    w = Whoiser.Whoiser()
     combined_domain_list = []
 
     for tld in tlds:
@@ -178,6 +180,13 @@ def check_domain_availability(domains):
             for domain in domains:
                 complete_domain = domain + '.' + tld
                 result_domain = Domain.Domain()
+                #get whois info
+                w.get_info(complete_domain)
+                result_domain.creation_date = w.creation_date
+                result_domain.expiration_date = w.expiration_date
+                print(result_domain.__dict__)
+                print(w.__dict__)
+                #print(w.expiration_date)
                 if enable_godaddy == True:
                     response = godaddy.check_available_domain_get(complete_domain)
                     os.system('sleep 0.9')

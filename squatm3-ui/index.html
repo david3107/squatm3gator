@@ -209,6 +209,12 @@
       <th class="th-sm">Available
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
+      <th class="th-sm">Registration date
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm">Expiration date 
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
       <th class="th-sm">Price
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
@@ -298,6 +304,7 @@
 
   socket.on('results', function(data) {
     console.log("Receiving from websockets");
+    console.log(data)
      $("#squat").prop("disabled", false);
      
 
@@ -331,6 +338,8 @@
         table.row.add( [
         item.fqdn,
         item.purchasable,
+        item.creation_date,
+        item.expiration_date,
         item.price,
         button
        
