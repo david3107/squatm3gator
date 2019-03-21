@@ -10,12 +10,11 @@ class Whoiser:
 
 	def get_info(self, domain):
 		self.domain = domain
+		self.expiration_date = ""
+		self.creation_date = ""
 		w = whois.query(self.domain)
-		print(w.__dict__)
 		if w is not None:
-			self.expiration_date = ""
-			self.creation_date = ""
 			if w.expiration_date is not None:
-				self.expiration_date = str(w.expiration_date.isoformat())
+				self.expiration_date = str(w.expiration_date.strftime("%d.%m.%Y %H:%M:%S"))
 			if w.creation_date is not None:
-				self.creation_date = str(w.creation_date.isoformat())
+				self.creation_date = str(w.creation_date.strftime("%d.%m.%Y %H:%M:%S"))
