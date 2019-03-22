@@ -199,16 +199,9 @@ def check_domain_availability(domains):
                 if enable_godaddy == True:
                     response = godaddy.check_available_domain_get(complete_domain)
                     #get whois info
-<<<<<<< HEAD
                     w.get_info(complete_domain)
                     result_domain.creation_date = w.creation_date
                     result_domain.expiration_date = w.expiration_date
-=======
-                    w = Whoiser.Whoiser(complete_domain)
-                    if w is not None:
-                        result_domain.creation_date = w.get_creation_date()
-                        result_domain.expiry_date = w.get_expiration_date()
->>>>>>> e4b3e66e5df9733e31e4a4ca4d05dac370e315f9
                     os.system('sleep 0.8')
                     if len(response) > 0:
                         response = json.loads(response)
