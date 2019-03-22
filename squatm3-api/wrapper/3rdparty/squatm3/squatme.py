@@ -81,15 +81,24 @@ def print_out(msg):
             exp_date = 'n/a'
             if msg.creation_date is not None:
                 cr_date = str(msg.creation_date)
+<<<<<<< HEAD
             if msg.expiration_date is not None:
                 exp_date = str(msg.expiration_date)
+=======
+            if msg.expiry_date is not None:
+                exp_date = str(msg.expiry_date)
+>>>>>>> e4b3e66e5df9733e31e4a4ca4d05dac370e315f9
             if msg.no_info:
                 outputer.print_text_to_console(msg.fqdn + " - No info retrieved, try manually")
             elif msg.purchasable:
                 outputer.print_text_to_console (
                     msg.fqdn + " - is available - " + msg.price + " - " + cr_date + "-" + exp_date)
             else:
+<<<<<<< HEAD
                 outputer.print_text_to_console(msg.fqdn + " - not available"+ " - "+msg.price+" - " + cr_date + "-" + exp_date)
+=======
+                outputer.print_text_to_console(msg.fqdn + " - not available" + " - " + cr_date + "-" + exp_date)
+>>>>>>> e4b3e66e5df9733e31e4a4ca4d05dac370e315f9
         elif isinstance(msg, list):
             for d in msg:
                 outputer.print_text_to_console(d.fqdn + " - No info retrieved, try manually")   
@@ -190,9 +199,16 @@ def check_domain_availability(domains):
                 if enable_godaddy == True:
                     response = godaddy.check_available_domain_get(complete_domain)
                     #get whois info
+<<<<<<< HEAD
                     w.get_info(complete_domain)
                     result_domain.creation_date = w.creation_date
                     result_domain.expiration_date = w.expiration_date
+=======
+                    w = Whoiser.Whoiser(complete_domain)
+                    if w is not None:
+                        result_domain.creation_date = w.get_creation_date()
+                        result_domain.expiry_date = w.get_expiration_date()
+>>>>>>> e4b3e66e5df9733e31e4a4ca4d05dac370e315f9
                     os.system('sleep 0.8')
                     if len(response) > 0:
                         response = json.loads(response)
@@ -218,6 +234,8 @@ def check_domain_availability(domains):
                     else:
                         result_domain.fqdn = urllib.parse.unquote(complete_domain);
                         result_domain.no_info = True
+
+                    
                 result_domain.fqdn = urllib.parse.unquote(complete_domain);
                 combined_domain_list.append(result_domain)
         except Exception as e:

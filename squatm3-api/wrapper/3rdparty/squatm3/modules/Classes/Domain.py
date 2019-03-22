@@ -7,7 +7,11 @@ class Domain:
 		self.price = ""
 		self.no_info = False
 		self.creation_date = ""
+<<<<<<< HEAD
 		self.expiration_date = ""
+=======
+		self.expiry_date = ""
+>>>>>>> e4b3e66e5df9733e31e4a4ca4d05dac370e315f9
 
 	def _asdict(self):
 		return self.__dict__
