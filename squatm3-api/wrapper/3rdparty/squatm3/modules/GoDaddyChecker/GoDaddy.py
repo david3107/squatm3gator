@@ -44,7 +44,7 @@ class GoDaddy:
 
 
         headers = {
-            'User-Agent': 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
+            'User-Agent': 'User-Agent: Mozilla/5.1 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36',
             'Upgrade-Insecure-Requests': '1',
             'Accept': 'text / html, application / xhtml + xml, application / xml;',
             'Accept-Encoding': 'gzip, deflate'

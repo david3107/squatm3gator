@@ -209,6 +209,12 @@
       <th class="th-sm">Available
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
+      <th class="th-sm">Registration date
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm">Expiration date 
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
       <th class="th-sm">Price
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
@@ -297,31 +303,19 @@
   
 
   socket.on('results', function(data) {
-    console.log("Receiving from websockets");
+    //console.log("Receiving from websockets");
+     console.log(data)
      $("#squat").prop("disabled", false);
      
-
      // disable the spinner (loading)
      $('#cover-spin').hide(0)
-
-
-    
-
-   
-
-
     try{
       
-      
       var attack = JSON.parse(data).messages[0];
-      
       //Clear the table only if it's a valid JSON
       table.clear();
-
       $.each(JSON.parse(data).domains, function(i, item) {
-        
-
-        if(item.purchasable  == "True")
+        if(item.purchasable)
           button = "<a type=\"button\" class=\"btn btn-sm pink\" style=\"color:white;\"  target=\"_blank\" href=\"https://uk.godaddy.com/domainsearch/find?checkAvail=1&tmskey=&domainToCheck="+item.fqdn+"\">Buy</a>"
         else
           button = "<a type=\"button\" class=\"btn btn-sm grey\" style=\"color:white;\">Not Available</a>"
@@ -331,7 +325,9 @@
         table.row.add( [
         item.fqdn,
         item.purchasable,
-        item.price,
+        item.creation_date,
+        item.expiration_date,
+        "€"+item.price,
         button
        
     ]);
@@ -347,18 +343,15 @@
 
     catch(e){
 
-
-
-
-
       var res = data.match(/6;30;42/g);
 
       if(!res){
         var parts = data.split('-')
-        
         var price = "";
-        var info = parts[1];
+        var info = parts[1].trim();
         var squatted_domain = parts[0];
+        var creation_date = "n/a"
+        var expiration_date = "n/a"
         
         if (parts.length == 2){
 
@@ -368,16 +361,24 @@
         
         else{
 
-          price = parts[2]
+          price = "€"+parts[2]
+          creation_date = parts[3]
+          expiration_date = parts[4]
 
         }
         
-      
-        button = "<a type=\"button\" class=\"btn btn-sm grey\" style=\"color:white;\">Not Available</a>"
-        
+        //console.log(info)
+         if(info == "is available")
+          button = "<a type=\"button\" class=\"btn btn-sm pink\" style=\"color:white;\"  target=\"_blank\" href=\"https://uk.godaddy.com/domainsearch/find?checkAvail=1&tmskey=&domainToCheck="+squatted_domain+"\">Buy</a>"
+        else
+          button = "<a type=\"button\" class=\"btn btn-sm grey\" style=\"color:white;\">Not Available</a>"
+
+       
         table.row.add( [
         squatted_domain,
         info,
+        creation_date,
+        expiration_date,
         price,
         button
         ] ).draw();
