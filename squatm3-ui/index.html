@@ -303,28 +303,18 @@
   
 
   socket.on('results', function(data) {
-    console.log("Receiving from websockets");
+    //console.log("Receiving from websockets");
+     console.log(data)
      $("#squat").prop("disabled", false);
      
      // disable the spinner (loading)
      $('#cover-spin').hide(0)
-
-
-    
-
-   
-
-
     try{
       
       var attack = JSON.parse(data).messages[0];
-      
       //Clear the table only if it's a valid JSON
       table.clear();
-
       $.each(JSON.parse(data).domains, function(i, item) {
-        
-
         if(item.purchasable)
           button = "<a type=\"button\" class=\"btn btn-sm pink\" style=\"color:white;\"  target=\"_blank\" href=\"https://uk.godaddy.com/domainsearch/find?checkAvail=1&tmskey=&domainToCheck="+item.fqdn+"\">Buy</a>"
         else
@@ -352,11 +342,10 @@
     }
 
     catch(e){
-      console.log(data)
+
       var res = data.match(/6;30;42/g);
 
       if(!res){
-        console.log(data)
         var parts = data.split('-')
         var price = "";
         var info = parts[1].trim();
