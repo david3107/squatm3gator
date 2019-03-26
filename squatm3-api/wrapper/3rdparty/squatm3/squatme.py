@@ -72,10 +72,11 @@ def prepare_arguments():
     all_args = args.all
 
 def print_out(msg):
-    global output, out_messages, out_domains
+    global output, out_messages, out_domains, msg_count
     color = '\x1b[6;30;42m'
     color_end = '\x1b[0m'
     if output == 'text':
+        print('S')
         if isinstance(msg, Domain.Domain):
             cr_date = 'n/a'
             exp_date = 'n/a'
@@ -209,10 +210,7 @@ def check_domain_availability(domains):
                             result_domain.purchasable = bool(response['ExactMatchDomain']['IsPurchasable'])
                             result_domain.price = str(response['ExactMatchDomain']['Price']) 
                             if result_domain.price == "0.0" and result_domain.purchasable:
-                                result_domain.price = str(response['Products'][0]['PriceInfo']['CurrentPrice'])
-                            
-
-                            
+                                result_domain.price = str(response['Products'][0]['PriceInfo']['CurrentPrice'])           
                             print_out(result_domain)
 
                     else:
@@ -245,6 +243,7 @@ def main():
 
 if __name__ == "__main__":
     args = url = tld = available = homoglyph_fast = enable_godaddy = flipper = remove = add = all_args = output = None
+    msg_count = 0
     out_messages =[]
     out_domains = []
     signal.signal(signal.SIGINT, signal_handler)

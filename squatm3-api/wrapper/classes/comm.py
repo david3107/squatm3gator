@@ -5,7 +5,7 @@ class Communication:
 
 	def build_connection():
 		return redis.Redis(
-	  	    host='redis',
+	  	    host='127.0.0.1',
 	    	port=6379,
 	    	password='waddup')
 	

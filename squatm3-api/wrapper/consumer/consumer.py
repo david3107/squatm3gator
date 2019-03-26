@@ -1,3 +1,4 @@
+from __future__ import print_function
 import redis, os, subprocess
 from wrapper.classes import job, comm, utils
 
@@ -26,13 +27,23 @@ def process(new_job):
 				report(c_jobs, c_jobs.channel_debug, worker_id + '#' + new_job.id + "# started attack job:" + new_job.url)
 				
 				job_process = subprocess.Popen("python3 wrapper/3rdparty/squatm3/squatme.py --url " + new_job.url + " " + new_job.options, 
-					shell=True, stdout=subprocess.PIPE)
-				while job_process.poll() is None:
+					shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+				print(job_process)
+				#while job_process.poll() is None:
+				#	output = job_process.stdout.readline()
+				#	print('XXX')
+				#	if len(output)>1:
+				while True:
 					output = job_process.stdout.readline()
-					if len(output)>1:
+					if output == "" and job_process.poll() is not None:
+						break
+					if output:
 						report(c_jobs, c_jobs.channel_reporting, worker_id + '#' + new_job.id + "# " + output.decode().strip())
-					
+					if "Done" in output.decode().strip():
+						break
 
+				rc = job_process.poll()
+				
 			elif new_job.command == "STOP":
 				report(c_jobs, c_jobs.channel_debug, worker_id + '#' + new_job.id + "# STOP ENUMERATION: " + new_job.id)
 				if job_process is not None and job_process.poll() is None:

@@ -21,7 +21,7 @@ app = Flask(__name__, template_folder=template_dir)
 
 app.debug = True
 async_mode = 'eventlet'
-api = Api(app)
+api = Api(app) 
 
 
 # config file has STATIC_FOLDER='/core/static'
@@ -33,13 +33,13 @@ app.static_folder=app.static_url_path
 # Setup Session
 app.config['SESSION_TYPE'] = 'redis'
 app.config['SECRET_KEY'] = 'mysecretrediskey'
-app.config['SESSION_REDIS'] = redis.Redis(host='redis', port=6379, password='waddup')
+app.config['SESSION_REDIS'] = redis.Redis(host='127.0.0.1', port=6379, password='waddup')
 sess = Session()
 sess.init_app(app)
 
 # Setup SocketIO
 socketio = SocketIO(app)
-socketio.init_app(app, async_mode=async_mode, message_queue='redis://:waddup@redis:6379/')
+socketio.init_app(app, async_mode=async_mode, message_queue='redis://:waddup@127.0.0.1:6379/')
 
 
 @app.before_first_request
@@ -187,4 +187,4 @@ def check_session():
 
 #main 
 if __name__== '__main__':
-    socketio.run(app, host="0.0.0.0", async_mode=async_mode)
+    socketio.run(app, host="0.0.0.0")
