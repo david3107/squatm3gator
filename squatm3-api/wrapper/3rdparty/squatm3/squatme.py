@@ -81,24 +81,15 @@ def print_out(msg):
             exp_date = 'n/a'
             if msg.creation_date is not None:
                 cr_date = str(msg.creation_date)
-<<<<<<< HEAD
             if msg.expiration_date is not None:
                 exp_date = str(msg.expiration_date)
-=======
-            if msg.expiry_date is not None:
-                exp_date = str(msg.expiry_date)
->>>>>>> e4b3e66e5df9733e31e4a4ca4d05dac370e315f9
             if msg.no_info:
                 outputer.print_text_to_console(msg.fqdn + " - No info retrieved, try manually")
             elif msg.purchasable:
                 outputer.print_text_to_console (
                     msg.fqdn + " - is available - " + msg.price + " - " + cr_date + "-" + exp_date)
             else:
-<<<<<<< HEAD
                 outputer.print_text_to_console(msg.fqdn + " - not available"+ " - "+msg.price+" - " + cr_date + "-" + exp_date)
-=======
-                outputer.print_text_to_console(msg.fqdn + " - not available" + " - " + cr_date + "-" + exp_date)
->>>>>>> e4b3e66e5df9733e31e4a4ca4d05dac370e315f9
         elif isinstance(msg, list):
             for d in msg:
                 outputer.print_text_to_console(d.fqdn + " - No info retrieved, try manually")   
