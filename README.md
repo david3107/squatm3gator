@@ -52,4 +52,5 @@ Current version is 1.5
 ## Presented at
 
 [Black Hat Arsenal Europe 2018](https://www.blackhat.com/eu-18/arsenal/schedule/index.html#squatm-cybersquatting-made-easy-13319)
+[Black Hat Arsenal Asia 2019](https://i.blackhat.com/asia-19/Arsenal/BH-Asia-2019_Arsenal.pptx)
        
