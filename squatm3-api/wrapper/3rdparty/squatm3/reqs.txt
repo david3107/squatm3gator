@@ -54,7 +54,7 @@ python-engineio==2.3.2
 python-socketio==2.0.0
 pytz==2018.5
 redis==2.10.6
-requests==2.20.1
+requests==2.32.4
 simplejson==3.16.0
 six==1.10.0
 tabulate==0.8.2
