@@ -71,7 +71,7 @@ urllib3==1.23
 validators==0.12.2
 veryprettytable==0.8.1
 wcwidth==0.1.7
-Werkzeug==0.14.1
+Werkzeug==3.1.4
 whois==0.7
 xcmd==0.0.3
 yarg==0.1.9
