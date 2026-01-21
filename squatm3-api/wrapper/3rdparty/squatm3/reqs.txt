@@ -41,7 +41,7 @@ numpy==1.14.3
 packaging==18.0
 pipreqs==0.4.9
 prompt-toolkit==2.0.7
-pyasn1==0.4.4
+pyasn1==0.6.2
 pycairo==1.17.0
 pycparser==2.19
 pycryptodomex==3.7.0
